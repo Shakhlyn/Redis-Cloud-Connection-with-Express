@@ -26,3 +26,27 @@ export const getAllLaunches = async (req, res, next) => {
     });
   }
 };
+export const getAllRockets = async (req, res, next) => {
+  const cachedRockets = await client.get("rockets");
+
+  if (cachedRockets) {
+    const cachedRocketsInJson = JSON.parse(cachedRockets);
+    res.status(200).json({
+      status: "success",
+      message: "Cached Data",
+      result: cachedRocketsInJson.length,
+      data: cachedRocketsInJson,
+    });
+  } else {
+    const rockets = await axios.get("https://api.spacexdata.com/v2/rockets");
+
+    await client.set("rockets", JSON.stringify(rockets.data), { EX: 10 });
+
+    res.status(200).json({
+      status: "success",
+      message: "From API",
+      result: rockets.data.length,
+      data: rockets.data,
+    });
+  }
+};

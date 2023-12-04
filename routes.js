@@ -1,8 +1,9 @@
 import express from "express";
-import { getAllLaunches } from "./controller.js";
+import { getAllLaunches, getAllRockets } from "./controller.js";
 
 const router = express.Router();
 
-router.get("/", getAllLaunches);
+router.get("/launches", getAllLaunches);
+router.get("/rockets", getAllRockets);
 
 export default router;

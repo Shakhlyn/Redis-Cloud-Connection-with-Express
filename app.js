@@ -3,6 +3,6 @@ import router from "./routes.js";
 
 const app = express();
 
-app.use("/launches", router);
+app.use("/api/v1/", router);
 
 export default app;
