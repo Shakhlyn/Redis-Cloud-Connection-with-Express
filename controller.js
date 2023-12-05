@@ -26,6 +26,7 @@ export const getAllLaunches = async (req, res, next) => {
     });
   }
 };
+
 export const getAllRockets = async (req, res, next) => {
   const cachedRockets = await client.get("rockets");
 
